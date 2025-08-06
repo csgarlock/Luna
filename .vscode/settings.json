@@ -1,7 +1,11 @@
 {
     "cSpell.words": [
+        "dneg",
         "iadd",
+        "imult",
+        "ineg",
         "isub",
-        "linalg"
+        "linalg",
+        "sdot"
     ]
 }

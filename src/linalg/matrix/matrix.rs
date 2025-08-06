@@ -1,4 +1,4 @@
-use std::ops::{Index, IndexMut};
+use std::{fmt, ops::{Index, IndexMut}};
 
 use crate::core::number::Number;
 
@@ -70,7 +70,7 @@ impl<T: Number> Matrix<T> {
         self.size() == self.data.len()
     }
 
-    fn index_to_location(&self, index: usize) -> (usize, usize) {
+    pub fn index_to_location(&self, index: usize) -> (usize, usize) {
         (index / self.cols, index % self.cols)
     }
     
@@ -101,4 +101,24 @@ impl<T:Number> IndexMut<usize> for Matrix<T> {
         &mut self.data[index]
     }
 }
+
+impl<T: Number + fmt::Display> fmt::Display for Matrix<T> {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        for i in 0..self.rows {
+            write!(f, "[")?;
+            for j in 0..self.cols {
+                write!(f, "{}", self[(i, j)])?;
+                if j < self.cols - 1 {
+                    write!(f, ", ")?;
+                }
+            }
+            write!(f, "]")?;
+            if i < self.rows - 1 {
+                writeln!(f)?;
+            }
+        }
+        Ok(())
+    }
+}
+
 
