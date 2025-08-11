@@ -27,7 +27,7 @@ impl Number for f64 {
 
 impl<T: RealNumber> Number for Complex<T> {
     fn zero() -> Self { Self { re: T::zero(), im: T::zero() } }
-    fn one() -> Self { Self { re: T::one(), im: T::one() } }
+    fn one() -> Self { Self { re: T::one(), im: T::zero() } }
 }
 
 pub trait RealNumber: Number {
