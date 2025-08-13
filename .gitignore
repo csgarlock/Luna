@@ -10,3 +10,5 @@ target
 **/mutants.out*/
 
 .vscode/
+
+src/main.rs
