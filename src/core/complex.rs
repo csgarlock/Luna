@@ -8,6 +8,18 @@ pub struct Complex<T: RealNumber> {
     pub im: T,
 }
 
+impl<T: RealNumber> Number for Complex<T> {
+    fn zero() -> Self { Self { re: T::zero(), im: T::zero() } }
+    fn one() -> Self { Self { re: T::one(), im: T::zero() } }
+    fn inverse(self) -> Self {
+        let dem = self.re * self.re + self.im + self.im;
+        Self {
+            re: self.re / dem,
+            im: -self.im / dem,
+        }
+    }
+}
+
 impl<T: RealNumber> Complex<T> {
     pub fn conjugate(self) -> Complex<T> {
         Complex { re: self.re, im: -self.im }

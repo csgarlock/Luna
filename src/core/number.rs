@@ -38,14 +38,6 @@ impl Number for f64 {
     }
 }
 
-impl<T: RealNumber> Number for Complex<T> {
-    fn zero() -> Self { Self { re: T::zero(), im: T::zero() } }
-    fn one() -> Self { Self { re: T::one(), im: T::zero() } }
-    fn inverse(self) -> Self {
-        todo!()
-    }
-}
-
 pub trait RealNumber: Number {
     fn power(self, other: Self) -> Self;
 }    
