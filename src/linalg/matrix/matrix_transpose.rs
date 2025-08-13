@@ -11,7 +11,7 @@ impl<T: Number> Matrix<T> {
     }
 
     #[inline(always)]
-    pub unsafe fn u_transpose(&mut self, size: usize) {
+    pub unsafe fn u_transpose(&mut self, _size: usize) {
         todo!();
     }
 }
@@ -54,7 +54,7 @@ pub unsafe fn u_gen_matrix_itranspose<T: Number>(a: &Matrix<T>, des: &mut Matrix
     for i in 0..size {
         unsafe {
             let loc = a.index_to_location(i);
-            *des.get_mut(i) = *a.get_loc((loc.1, loc.0));
+            *des.get_mut(i) = *a.get_loc(loc.1, loc.0);
         }
     }
 }
