@@ -1,7 +1,5 @@
 use std::{fmt::Debug, ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Neg, Sub, SubAssign}};
 
-use crate::core::complex::Complex;
-
 pub trait Number:
     Copy
     + Debug

@@ -1,4 +1,4 @@
-use std::{fmt, ops::{Index, IndexMut}};
+use std::{fmt, ops::{Index, IndexMut}, ptr::swap};
 
 use crate::core::number::Number;
 
@@ -56,10 +56,10 @@ impl<T: Number> Matrix<T> {
         let row2_offset = row2 * cols;
         for col in 0..cols {
             unsafe {
-                let val1 = *self.get_mut(row1_offset + col);
-                let val2 = *self.get_mut(row2_offset + col);
-                *self.get_mut(row1_offset + col) = val2;
-                *self.get_mut(row2_offset + col) = val1;
+                swap(
+                    self.data.as_mut_ptr().add(row1_offset + col),
+                    self.data.as_mut_ptr().add(row2_offset + col),
+                );
             }
         }   
     }
