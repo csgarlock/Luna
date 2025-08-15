@@ -1,4 +1,4 @@
-use std::{fmt::Debug, ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Neg, Sub, SubAssign}};
+use std::{fmt::Debug, num::FpCategory, ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Neg, Sub, SubAssign}};
 
 pub trait Number:
     Copy
@@ -18,6 +18,7 @@ pub trait Number:
     fn zero() -> Self;
     fn one() -> Self;
     fn inverse(self) -> Self;
+    fn valid(self) -> bool;
 }
 
 impl Number for f32 {
@@ -26,6 +27,12 @@ impl Number for f32 {
     fn inverse(self) -> Self {
         1.0 / self
     }
+    fn valid(self) -> bool {
+        match self.classify() {
+            FpCategory::Nan | FpCategory::Infinite => false,
+            _ => true
+        }
+    }
 }
 
 impl Number for f64 {
@@ -33,6 +40,12 @@ impl Number for f64 {
     fn one() -> Self { 1.0 }
     fn inverse(self) -> Self {
         1.0 / self
+    }
+    fn valid(self) -> bool {
+        match self.classify() {
+            FpCategory::Nan | FpCategory::Infinite => false,
+            _ => true
+        }
     }
 }
 

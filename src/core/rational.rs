@@ -10,9 +10,12 @@ pub struct Rational {
 }
 
 impl Number for Rational {
-    fn zero() -> Self { Self { pos: true, num: 0, den: 0 } }
+    fn zero() -> Self { Self { pos: true, num: 0, den: 1 } }
     fn one() -> Self { Self {pos: true, num: 1, den: 1} }
     fn inverse(self) -> Self { Self { pos: self.pos, num: self.den, den: self.num } }
+    fn valid(self) -> bool {
+        self.den != 0
+    }
 }
 
 impl Rational {
@@ -132,7 +135,9 @@ impl Neg for Rational {
 
 impl PartialEq for Rational {
     fn eq(&self, other: &Self) -> bool {
-        if self.pos != other.pos {
+        if self.num == 0 && other.num == 0 {
+            true
+        } else if self.pos != other.pos {
             false
         } else if self.num * other.den == other.num * self.den {
             true

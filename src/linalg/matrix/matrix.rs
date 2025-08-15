@@ -77,7 +77,15 @@ impl<T: Number> Matrix<T> {
     }
 
     pub fn well_formed(&self) -> bool {
-        self.size() == self.data.len()
+        if self.size() != self.data.len() {
+            return false;
+        }
+        for val in self.data.iter() {
+            if !val.valid() {
+                return false
+            }
+        }
+        true
     }
 
     pub fn index_to_location(&self, index: usize) -> (usize, usize) {

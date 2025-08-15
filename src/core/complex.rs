@@ -18,6 +18,9 @@ impl<T: RealNumber> Number for Complex<T> {
             im: -self.im / dem,
         }
     }
+    fn valid(self) -> bool {
+        self.re.valid() && self.im.valid()
+    }
 }
 
 impl<T: RealNumber> Complex<T> {
